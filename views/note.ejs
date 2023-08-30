@@ -8,7 +8,6 @@
     function confirmRead() {
      const secureTextElement = document.getElementById("secureText");
      secureTextElement.innerText = '<%= text %>';
-     secureTextElement.style.filter = "blur(0)";
        markAsRead();
        closeModal();
     }
