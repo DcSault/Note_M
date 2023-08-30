@@ -7,6 +7,7 @@ Bienvenue dans l'application "note_m" ! Cette application permet de créer des n
 - [Caractéristiques](#-caractéristiques)
 - [Installation](#-installation)
 - [Utilisation](#-utilisation)
+- [Fonctionnement](#-fonctionnement)
 - [Contribution](#-contribution)
 - [Crédits](#-crédits)
 
@@ -41,6 +42,9 @@ node app.js
 - Écrivez votre texte et cliquez sur "Upload".
 - Copiez le lien généré et partagez-le.
 - Le destinataire peut ouvrir le lien pour lire la note, qui sera ensuite automatiquement supprimée.
+
+## 🔧 Fonctionnement
+![Cover](https://github.com/DcSault/Note_M/blob/8d39f2c3d3317c93adeb1598df17c13aa8b241a0/info.png)
 
 ## 🤝 Contribution
 
