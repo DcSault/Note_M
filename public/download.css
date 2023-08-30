@@ -35,12 +35,24 @@
   width: 300px;
   text-align: center;
   display: flex;          /* Ajout de Flexbox */
-  flex-direction: column; /* Orientation en colonne */
+  flex-direction: row; /* Orientation en colonne */
   align-items: center;    /* Centrage des éléments */
 }
 
 .modal-content button {
   margin: 5px;  /* Espacement autour des boutons */
+}
+
+.modal-content-e {
+  background-color: rgba(255, 255, 255, 0);
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #88888800;
+  width: 300px;
+  text-align: center;
+  display: flex;          
+  flex-direction: column; 
+  align-items: center;    
 }
 
 .close {
