@@ -1,4 +1,4 @@
-# 🚀 Note_m
+# 🚀 Note_M
 
 Bienvenue dans l'application "note_m" ! Cette application permet de créer des notes textuelles sécurisées et de les partager via un lien unique.
 
