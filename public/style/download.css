@@ -45,6 +45,34 @@
   gap: 10px;
 }
 
+/* Style pour le modal Easter Egg */
+.modal-content-e {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  margin: auto;
+  margin-top: 50px;
+  transition: transform 0.3s ease;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-content-e:hover {
+  transform: scale(1.05);
+}
+
+/* Style pour l'image du chat */
+.modal-content-e img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+
 /* Autres styles */
 body {
   background: #F1F1F1;
