@@ -44,7 +44,7 @@ node app.js
 - Le destinataire peut ouvrir le lien pour lire la note, qui sera ensuite automatiquement supprimée.
 
 ## 🔧 Fonctionnement
-![Cover](https://github.com/DcSault/Note_M/blob/8d39f2c3d3317c93adeb1598df17c13aa8b241a0/info.png)
+![Cover](https://github.com/DcSault/Note_M/blob/c320b598e7a3c2b9212fdb7f521d72dcf1cd024e/info.png)
 
 ## 🤝 Contribution
 
