@@ -34,6 +34,13 @@
   border: 1px solid #888;
   width: 300px;
   text-align: center;
+  display: flex;          /* Ajout de Flexbox */
+  flex-direction: column; /* Orientation en colonne */
+  align-items: center;    /* Centrage des éléments */
+}
+
+.modal-content button {
+  margin: 5px;  /* Espacement autour des boutons */
 }
 
 .close {
