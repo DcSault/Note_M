@@ -28,23 +28,25 @@
 }
 
 .modal-content {
-  background-color: rgba(255, 255, 255, 0.1); /* Couleur de fond transparente */
-  backdrop-filter: blur(10px); /* Effet de flou */
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.5); /* Bordure semi-transparente */
   width: 300px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative; /* Position relative pour le bouton de fermeture */
+  position: relative;
 }
 
 .close {
-  position: absolute; /* Position absolue */
-  top: 10px; /* En haut */
-  right: 10px; /* À droite */
+  position: absolute;
+  top: 10px;
+  right: 10px;
   color: #aaa;
   font-size: 28px;
   font-weight: bold;
