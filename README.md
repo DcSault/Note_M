@@ -24,7 +24,7 @@ Bienvenue dans l'application "note_m" ! Cette application permet de créer des n
 
 1. Clonez ce dépôt:
 ```
-git clone https://github.com/votre_nom_dutilisateur/note_m
+git clone https://github.com/DcSault/Note_M
 ```
 2. Installez les dépendances:
 ```
