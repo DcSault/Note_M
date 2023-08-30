@@ -4,16 +4,20 @@
   <title>View Note</title>
   <link rel="stylesheet" type="text/css" href="/download.css">
   <script>
-    function showNote() {
-      const userConfirmed = confirm("Voulez-vous vraiment lire cette note ? Elle sera supprimée après.");
-      if (userConfirmed) {
-        document.getElementById("secureText").innerText = '<%= text %>';
-        markAsRead();
-      }
+    // Function to confirm reading
+    function confirmRead() {
+      document.getElementById("secureText").innerText = '<%= text %>';
+      markAsRead();
+      closeModal();
+    }
+
+    // Function to close the modal without reading
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
     }
 
     function markAsRead() {
-      const id = '<%= id %>'; // Assurez-vous de passer l'ID de la note depuis le serveur
+      const id = '<%= id %>';
       fetch(`/markAsRead/${id}`, {
         method: 'POST'
       }).then(response => {
@@ -36,11 +40,20 @@
     }
   </script>
 </head>
-<body onload="showNote()">
+<body>
+  <!-- Modal -->
+  <div id="myModal" class="modal" style="display: block;">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <p>Voulez-vous vraiment lire cette note ? Elle sera supprimée après.</p>
+      <button onclick="confirmRead()">Oui</button>
+      <button onclick="closeModal()">Non</button>
+    </div>
+  </div>
+
   <div class="glass">
     <h1>Secure Note</h1>
     <div id="secureText">
-      <!-- Le texte sécurisé sera inséré ici -->
     </div>
     <button onclick="copyToClipboard()">Presse-Papiers</button>
   </div>
