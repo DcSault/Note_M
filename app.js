@@ -49,7 +49,7 @@ app.get('/note/:id', async (req, res) => {
   const encryptedText = await client.get(id);
   
   if (!encryptedText) {
-    return res.status(404).send('Text not found');
+    return res.status(404).render('404');  // Modification ici
   }
   
   const decryptedText = crypto.AES.decrypt(encryptedText, MASTER_KEY).toString(crypto.enc.Utf8);
@@ -62,7 +62,7 @@ app.post('/markAsRead/:id', async (req, res) => {
   const encryptedText = await client.get(id);
   
   if (!encryptedText) {
-    return res.status(404).send('Text not found');
+    return res.status(404).render('404');  // Modification ici
   }
   
   // Supprimer immédiatement l'entrée de Redis
