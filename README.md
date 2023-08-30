@@ -32,7 +32,7 @@ npm install
 ```
 3. Configurez vos variables d'environnement en créant un fichier `.env` avec les clés nécessaires (par exemple, `MASTER_KEY` pour le cryptage et les Identifiant Redis).
 
-5. Démarrez l'application:
+4. Démarrez l'application:
 ```
 node app.js
 ```
