@@ -52,7 +52,6 @@ Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à
 
 ## 📜 Crédits
 
-Conçu et développé par ROSIQUE Victor .
-Merci à tous ceux qui ont contribué au projet !
+Conçu et développé par Victor ROSIQUE. Merci à tous ceux qui ont contribué au projet !
 
 
