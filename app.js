@@ -40,11 +40,11 @@ app.post('/upload', async (req, res) => {
   // Sauvegarder dans Redis
   await client.set(id, encryptedText, 'EX', 600); // Expire après 600 secondes
   
-  const shareLink = `https://note-m.onrender.com/download/${id}`;
+  const shareLink = `https://note-m.onrender.com/note/${id}`;
   res.render('share', { link: shareLink });
 });
 
-app.get('/download/:id', async (req, res) => {
+app.get('/note/:id', async (req, res) => {
   const { id } = req.params;
   const encryptedText = await client.get(id);
   
@@ -54,7 +54,7 @@ app.get('/download/:id', async (req, res) => {
   
   const decryptedText = crypto.AES.decrypt(encryptedText, MASTER_KEY).toString(crypto.enc.Utf8);
   
-  res.render('download', { text: decryptedText, id: id });
+  res.render('note', { text: decryptedText, id: id });
 });
 
 app.post('/markAsRead/:id', async (req, res) => {
