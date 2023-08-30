@@ -28,15 +28,27 @@
 }
 
 .modal-content {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.1); /* Couleur de fond transparente */
+  backdrop-filter: blur(10px); /* Effet de flou */
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* Bordure semi-transparente */
   width: 300px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative; /* Position relative pour le bouton de fermeture */
+}
+
+.close {
+  position: absolute; /* Position absolue */
+  top: 10px; /* En haut */
+  right: 10px; /* À droite */
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .button-container {
@@ -44,10 +56,6 @@
   flex-direction: row;
   justify-content: center;
   gap: 10px;
-}
-
-.modal-content button {
-  margin: 5px;
 }
 
 .modal-content-e {
@@ -60,14 +68,6 @@
   display: flex;          
   flex-direction: column; 
   align-items: center;    
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
 }
 
 /* Autres styles */
