@@ -1,0 +1,52 @@
+/* Style général */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F1F1F1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  /* Style du conteneur */
+  .container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease; /* Ajout de la transition */
+  }
+  
+  .container:hover {
+    transform: scale(1.05); /* Effet de zoom au survol */
+  }
+  
+  /* Style du titre */
+  h1 {
+    font-size: 96px;
+    margin: 0;
+    color: #1F1F1F;
+  }
+  
+  /* Style du paragraphe */
+  p {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  
+  /* Style du lien */
+  a {
+    font-size: 18px;
+    color: #0078D4;
+    text-decoration: none;
+    transition: all 0.3s ease; /* Ajout de la transition */
+  }
+  
+  a:hover {
+    text-decoration: underline;
+    color: #005A9E; /* Changement de couleur au survol */
+  }
+  
