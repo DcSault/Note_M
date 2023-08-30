@@ -54,10 +54,21 @@ app.get('/download/:id', async (req, res) => {
   
   const decryptedText = crypto.AES.decrypt(encryptedText, MASTER_KEY).toString(crypto.enc.Utf8);
   
+  res.render('download', { text: decryptedText, id: id });
+});
+
+app.post('/markAsRead/:id', async (req, res) => {
+  const { id } = req.params;
+  const encryptedText = await client.get(id);
+  
+  if (!encryptedText) {
+    return res.status(404).send('Text not found');
+  }
+  
   // Supprimer immédiatement l'entrée de Redis
   await client.del(id);
   
-  res.render('download', { text: decryptedText });
+  res.status(200).send('Note marked as read and deleted');
 });
 
 app.listen(port, () => {

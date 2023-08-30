@@ -4,9 +4,30 @@
   <title>View Note</title>
   <link rel="stylesheet" type="text/css" href="/download.css">
   <script>
+    function showNote() {
+      const userConfirmed = confirm("Voulez-vous vraiment lire cette note ? Elle sera supprimée après.");
+      if (userConfirmed) {
+        document.getElementById("secureText").innerText = '<%= text %>';
+        markAsRead();
+      }
+    }
+
+    function markAsRead() {
+      const id = '<%= id %>'; // Assurez-vous de passer l'ID de la note depuis le serveur
+      fetch(`/markAsRead/${id}`, {
+        method: 'POST'
+      }).then(response => {
+        if (response.ok) {
+          console.log('Note marked as read and deleted');
+        } else {
+          console.log('Failed to mark note as read');
+        }
+      });
+    }
+
     function copyToClipboard() {
       const textArea = document.createElement('textarea');
-      textArea.value = '<%= text %>';
+      textArea.value = document.getElementById("secureText").innerText;
       document.body.appendChild(textArea);
       textArea.select();
       document.execCommand('copy');
@@ -15,11 +36,11 @@
     }
   </script>
 </head>
-<body>
+<body onload="showNote()">
   <div class="glass">
     <h1>Secure Note</h1>
     <div id="secureText">
-      <%= text %>
+      <!-- Le texte sécurisé sera inséré ici -->
     </div>
     <button onclick="copyToClipboard()">Presse-Papiers</button>
   </div>
