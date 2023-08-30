@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>View Note</title>
+  <link rel="stylesheet" type="text/css" href="/download.css">
+  <script>
+    function copyToClipboard() {
+      const textArea = document.createElement('textarea');
+      textArea.value = '<%= text %>';
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      alert('Note copié dans le presse-papiers');
+    }
+  </script>
+</head>
+<body>
+  <div class="glass">
+    <h1>Secure Note</h1>
+    <div id="secureText">
+      <%= text %>
+    </div>
+    <button onclick="copyToClipboard()">Presse-Papiers</button>
+    <p>La notes va ce supprimer dans 2 minutes.</p>
+  </div>
+</body>
+</html>

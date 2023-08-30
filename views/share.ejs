@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Share Link</title>
+  <link rel="stylesheet" type="text/css" href="/share.css">
+  <script>
+    function copyToClipboard(event) {
+      event.preventDefault();
+      const textArea = document.createElement('textarea');
+      textArea.value = '<%= link %>';
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      alert('Lien copié dans le presse-papiers');
+    }
+  </script>
+</head>
+<body>
+  <div class="glass">
+    <h1>Votre note sécurisée</h1>
+    <p>Voici le lien sécurisé:</p>
+    <a href="<%= link %>" onclick="copyToClipboard(event)"><%= link %></a>
+  </div>
+</body>
+</html>
