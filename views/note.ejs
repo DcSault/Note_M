@@ -4,7 +4,43 @@
   <title>View Note</title>
   <link rel="stylesheet" type="text/css" href="/download.css">
   <script src="/easteregg.js"></script>
-  <script src="/download.js"></script>
+  <script>
+    // Function to confirm reading
+    function confirmRead() {
+     const secureTextElement = document.getElementById("secureText");
+     secureTextElement.innerText = '<%= text %>';
+       markAsRead();
+       closeModal();
+    }
+
+    // Function to close the modal without reading
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
+    }
+
+    function markAsRead() {
+      const id = '<%= id %>';
+      fetch(`/markAsRead/${id}`, {
+        method: 'POST'
+      }).then(response => {
+        if (response.ok) {
+          console.log('Note marked as read and deleted');
+        } else {
+          console.log('Failed to mark note as read');
+        }
+      });
+    }
+
+    function copyToClipboard() {
+      const textArea = document.createElement('textarea');
+      textArea.value = document.getElementById("secureText").innerText;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      alert('Note copié dans le presse-papiers');
+    }
+  </script>
 </head>
   <body>
   <!-- Modal -->
@@ -18,6 +54,8 @@
       </div>
    </div>
   </div>
+
+
   <div class="glass">
     <h1>Secure Note</h1>
     <div id="secureText">
