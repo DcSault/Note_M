@@ -1,4 +1,4 @@
-# 🚀 note_m
+# 🚀 Note_M
 
 Bienvenue dans l'application "note_m" ! Cette application permet de créer des notes textuelles sécurisées et de les partager via un lien unique.
 
@@ -32,7 +32,7 @@ npm install
 ```
 3. Configurez vos variables d'environnement en créant un fichier `.env` avec les clés nécessaires (par exemple, `MASTER_KEY` pour le cryptage et les Identifiant Redis).
 
-5. Démarrez l'application:
+4. Démarrez l'application:
 ```
 node app.js
 ```
@@ -52,7 +52,6 @@ Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou à
 
 ## 📜 Crédits
 
-Conçu et développé par ROSIQUE Victor .
-Merci à tous ceux qui ont contribué au projet !
+Conçu et développé par Victor ROSIQUE. Merci à tous ceux qui ont contribué au projet !
 
 
