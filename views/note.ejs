@@ -43,16 +43,19 @@
     }
   </script>
 </head>
-<body>
+  <body>
   <!-- Modal -->
   <div id="myModal" class="modal" style="display: block;">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
       <p>Voulez-vous vraiment lire cette note ? Elle sera supprimée après.</p>
-      <button onclick="confirmRead()">Oui</button>
-      <button onclick="closeModal()">Non</button>
-    </div>
+      <div class="button-container"> <!-- Nouveau conteneur -->
+        <button onclick="confirmRead()">Oui</button>
+        <button onclick="closeModal()">Non</button>
+      </div>
+   </div>
   </div>
+
 
   <div class="glass">
     <h1>Secure Note</h1>
