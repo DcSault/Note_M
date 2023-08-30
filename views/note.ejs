@@ -2,16 +2,16 @@
 <html>
 <head>
   <title>View Note</title>
-  <link rel="stylesheet" type="text/css" href="/download.css">
-  <script src="/download.js"></script>
-  <script src="/easteregg.js"></script>
+  <link rel="stylesheet" type="text/css" href="/style/download.css">
+  <script src="/script/download.js"></script>
+  <script src="/script/easteregg.js"></script>
 </head>
   <body>
   <!-- Modal -->
   <div id="myModal" class="modal" style="display: block;">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
-      <p>Voulez-vous vraiment lire cette note ? Elle sera supprimée après.</p>
+      <p>Voulez-vous vraiment lire cette note ? Elle sera supprimée automatiquement après.</p>
       <div class="button-container"> <!-- Nouveau conteneur -->
         <button onclick="confirmRead()">Oui</button>
         <button onclick="closeModal()">Non</button>
