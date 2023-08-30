@@ -1,59 +1,64 @@
 /* Style Glassmorphism */
 .glass {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    padding: 20px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 400px;
-    margin: auto;
-    margin-top: 50px;
-    transition: transform 0.3s ease;
-  }
-  
-  .glass:hover {
-    transform: scale(1.05);
-  }
-  
-  /* Autres styles */
-  body {
-    background: #F1F1F1;
-    font-family: Arial, sans-serif;
-  }
-  
-  h1 {
-    text-align: center;
-    color: #1F1F1F;
-  }
-  
-  #secureText {
-    margin: 20px 0;
-    padding: 10px;
-    border-radius: 8px;
-    background: white;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  button {
-    display: block;
-    margin: auto;
-    padding: 10px 20px;
-    border-radius: 8px;
-    border: none;
-    background-color: #0078D4;
-    color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #005A9E;
-    box-shadow: 0 0 10px rgba(0, 90, 158, 0.5);
-    transform: translateY(-2px);
-  }
-  
-  p {
-    text-align: center;
-    color: #1F1F1F;
-  }
-  
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  margin: auto;
+  margin-top: 50px;
+  transition: transform 0.3s ease;
+}
+
+.glass:hover {
+  transform: scale(1.05);
+}
+
+/* Autres styles */
+body {
+  background: #F1F1F1;
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #1F1F1F;
+}
+
+#secureText {
+  margin: 20px 0;
+  padding: 10px;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  filter: blur(4px); /* Ajout de l'effet de flou */
+  transition: filter 0.3s ease; /* Transition douce */
+}
+
+#secureText:hover {
+  filter: blur(0); /* Retrait de l'effet de flou au survol */
+}
+
+button {
+  display: block;
+  margin: auto;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #0078D4;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #005A9E;
+  box-shadow: 0 0 10px rgba(0, 90, 158, 0.5);
+  transform: translateY(-2px);
+}
+
+p {
+  text-align: center;
+  color: #1F1F1F;
+}
