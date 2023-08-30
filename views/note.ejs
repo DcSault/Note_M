@@ -6,9 +6,11 @@
   <script>
     // Function to confirm reading
     function confirmRead() {
-      document.getElementById("secureText").innerText = '<%= text %>';
-      markAsRead();
-      closeModal();
+     const secureTextElement = document.getElementById("secureText");
+     secureTextElement.innerText = '<%= text %>';
+     secureTextElement.style.filter = "blur(0)";
+       markAsRead();
+       closeModal();
     }
 
     // Function to close the modal without reading

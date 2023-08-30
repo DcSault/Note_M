@@ -61,6 +61,8 @@ h1 {
   border-radius: 8px;
   background: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  filter: blur(4px); /* Ajout de l'effet de flou */
+  transition: filter 0.3s ease; /* Transition douce */
 }
 
 button {
