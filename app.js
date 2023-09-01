@@ -40,7 +40,7 @@ app.post('/upload', async (req, res) => {
   // Sauvegarder dans Redis
   await client.set(id, encryptedText, 'EX', 600); // Expire après 600 secondes
   
-  const shareLink = `https://note-m.onrender.com/note/${id}`;
+  const shareLink = `https://note-m.cyclic.app/note/${id}`;
   res.render('share', { link: shareLink });
 });
 
@@ -77,5 +77,5 @@ app.use((req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server running at https://note-m.onrender.com:${port}/`);
+  console.log(`Server running at https://note-m.cyclic.app:${port}/`);
 });
