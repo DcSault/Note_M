@@ -6,7 +6,7 @@ const app = express();
 const port = 443;
 
 // ======== Load Environment Variables ========
-dotenv.config({ path: './redis.env' });
+dotenv.config({ path: './process.env' });
 const { MASTER_KEY, REDIS_HOST, REDIS_PORT, REDIS_PASSWORD } = process.env;
 
 // ======== Configuration Redis ========
