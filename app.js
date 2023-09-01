@@ -3,7 +3,7 @@ const crypto = require('crypto-js');
 const Redis = require('ioredis');
 const dotenv = require('dotenv');
 const app = express();
-const port = 443;
+const port = 3000;
 
 // ======== Load Environment Variables ========
 dotenv.config({ path: './process.env' });
