@@ -70,10 +70,9 @@ app.get('/note/:id', async (req, res) => {
   }
 
   let promptScript = "";
-  let decryptedAccessCode = "";
 
   if (encryptedData.accessCode) {
-    decryptedAccessCode = crypto.AES.decrypt(encryptedData.accessCode, MASTER_KEY).toString(crypto.enc.Utf8);
+    const decryptedAccessCode = crypto.AES.decrypt(encryptedData.accessCode, MASTER_KEY).toString(crypto.enc.Utf8);
     promptScript = `
       <script>
         const userAccessCode = prompt("Entrez le code d'accès pour cette note:");
@@ -84,15 +83,12 @@ app.get('/note/:id', async (req, res) => {
       </script>
     `;
   }
-  
+
   const decryptedText = crypto.AES.decrypt(encryptedData.text, MASTER_KEY).toString(crypto.enc.Utf8);
   
-  res.render('note', { 
-    text: decryptedText, 
-    id: id, 
-    promptScript: promptScript 
-  });
+  res.render('note', { text: decryptedText, id: id, promptScript: promptScript });
 });
+
 
 // Route pour marquer une note comme lue et la supprimer
 app.post('/markAsRead/:id', async (req, res) => {
