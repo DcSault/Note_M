@@ -51,12 +51,14 @@ app.post('/upload', async (req, res) => {
   }
 
   // Sauvegarder dans Redis
-  await client.hmset(id, dataToStore, 'EX', 600);
+  await client.hset(id, dataToStore);
   
+  // Définir l'expiration
+  await client.expire(id, 600);
+
   const shareLink = `https://note-m.cyclic.app/note/${id}`;
   res.render('share', { link: shareLink });
 });
-
 
 // Route pour télécharger une note
 app.get('/note/:id', async (req, res) => {
