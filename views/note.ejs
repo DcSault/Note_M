@@ -5,19 +5,39 @@
   <link rel="stylesheet" type="text/css" href="/style/download.css">
   <script src="/script/download.js"></script>
   <script src="/script/easteregg.js"></script>
+  <script>
+    function confirmRead() {
+      // Votre logique existante
+      <% if (requiresAccessCode) { %>
+        const userAccessCode = document.getElementById("accessCodeInput").value;
+        if (userAccessCode) {
+          // Ajoutez ici une logique pour vérifier le code d'accès
+          // ...
+        } else {
+          alert("Code d'accès incorrect ou annulé.");
+          return;
+        }
+      <% } %>
+      // Votre logique existante pour lire la note
+    }
+  </script>
 </head>
-  <body>
+<body>
   <!-- Modal -->
   <div id="myModal" class="modal" style="display: block;">
     <div class="modal-content">
       <span class="close" onclick="closeModal()">&times;</span>
       <p>Voulez-vous vraiment lire cette note ? Elle sera supprimée automatiquement après.</p>
-      <input type="text" id="accessCodeInput" placeholder="Code d'accès (optionnel)">
-      <div class="button-container"> <!-- Nouveau conteneur -->
+      <% if (requiresAccessCode) { %>
+        <input type="text" id="accessCodeInput" placeholder="Code d'accès (obligatoire)">
+      <% } else { %>
+        <input type="text" id="accessCodeInput" placeholder="Code d'accès (optionnel)">
+      <% } %>
+      <div class="button-container">
         <button onclick="confirmRead()">Oui</button>
         <button onclick="closeModal()">Non</button>
       </div>
-   </div>
+    </div>
   </div>
   <div class="glass">
     <h1>Secure Note</h1>

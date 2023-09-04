@@ -69,20 +69,23 @@ app.get('/note/:id', async (req, res) => {
     return res.status(404).render('404'); 
   }
 
+  let promptScript = "";
+
   if (encryptedData.accessCode) {
-    // Demandez le code d'accès ici (peut-être via un formulaire ou une boîte de dialogue)
-    const userAccessCode = req.query.accessCode; // ou obtenir d'une autre manière
-    
-    const decryptedAccessCode = crypto.AES.decrypt(encryptedData.accessCode, MASTER_KEY).toString(crypto.enc.Utf8);
-    
-    if (decryptedAccessCode !== userAccessCode) {
-      return res.status(403).send('Code d\'accès incorrect');
-    }
+    promptScript = `
+      <script>
+        const userAccessCode = prompt("Entrez le code d'accès pour cette note:");
+        if (userAccessCode !== "${decryptedAccessCode}") {
+          alert("Code d'accès incorrect");
+          window.location.href = "/"; // Redirige vers la page d'accueil
+        }
+      </script>
+    `;
   }
   
   const decryptedText = crypto.AES.decrypt(encryptedData.text, MASTER_KEY).toString(crypto.enc.Utf8);
-  
-  res.render('note', { text: decryptedText, id: id });
+  res.render('note', { text: decryptedText, id: id, requiresAccessCode: !!encryptedData.accessCode });
+  res.render('note', { text: decryptedText, id: id, promptScript: promptScript });
 });
 
 // Route pour marquer une note comme lue et la supprimer
