@@ -39,23 +39,13 @@ app.get('/', (req, res) => {
 
 // Route pour l'upload de texte
 app.post('/upload', async (req, res) => {
-  const { text, accessCode } = req.body;
+  const { text } = req.body;
   const encryptedText = crypto.AES.encrypt(text, MASTER_KEY).toString();
   const id = new Date().getTime().toString();
   
-  const dataToStore = { 'text': encryptedText };
-
-  if (accessCode) {
-    const encryptedAccessCode = crypto.AES.encrypt(accessCode, MASTER_KEY).toString();
-    dataToStore['accessCode'] = encryptedAccessCode;
-  }
-
-  // Sauvegarder dans Redis
-  await client.hset(id, dataToStore);
+  // Sauvegarder le texte chiffré dans Redis
+  await client.set(id, encryptedText, 'EX', 600); // Expire après 600 secondes
   
-  // Définir l'expiration
-  await client.expire(id, 600);
-
   const shareLink = `https://note-m.cyclic.app/note/${id}`;
   res.render('share', { link: shareLink });
 });
@@ -63,32 +53,16 @@ app.post('/upload', async (req, res) => {
 // Route pour télécharger une note
 app.get('/note/:id', async (req, res) => {
   const { id } = req.params;
-  const encryptedData = await client.hgetall(id);
+  const encryptedText = await client.get(id);
   
-  if (!encryptedData || !encryptedData.text) {
-    return res.status(404).render('404'); 
+  if (!encryptedText) {
+    return res.status(404).render('404'); // Page d'erreur 404
   }
-
-  let promptScript = "";
-
-  if (encryptedData.accessCode) {
-    const decryptedAccessCode = crypto.AES.decrypt(encryptedData.accessCode, MASTER_KEY).toString(crypto.enc.Utf8);
-    promptScript = `
-      <script>
-        const userAccessCode = prompt("Entrez le code d'accès pour cette note:");
-        if (userAccessCode !== "${decryptedAccessCode}") {
-          alert("Code d'accès incorrect");
-          window.location.href = "/"; // Redirige vers la page d'accueil
-        }
-      </script>
-    `;
-  }
-
-  const decryptedText = crypto.AES.decrypt(encryptedData.text, MASTER_KEY).toString(crypto.enc.Utf8);
   
-  res.render('note', { text: decryptedText, id: id, promptScript: promptScript });
+  const decryptedText = crypto.AES.decrypt(encryptedText, MASTER_KEY).toString(crypto.enc.Utf8);
+  
+  res.render('note', { text: decryptedText, id: id });
 });
-
 
 // Route pour marquer une note comme lue et la supprimer
 app.post('/markAsRead/:id', async (req, res) => {
