@@ -48,14 +48,19 @@ app.post('/upload', async (req, res) => {
 
   const dashboardData = {
     created_at: new Date(),
-    note_id: id,
     action: "créée"
   };
   await client.lpush('dashboardData', JSON.stringify(dashboardData));
 
   const shareLink = `https://note-m.cyclic.app/note/${id}`;
   res.render('share', { link: shareLink });
+
+  res.status(200).json({
+    id: id,
+    status: 'Note créée avec succès',
+  });
 });
+
 
 app.get('/note/:id', async (req, res) => {
   const { id } = req.params;
