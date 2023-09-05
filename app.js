@@ -44,8 +44,6 @@ app.post('/upload', async (req, res) => {
   await client.set(id, encryptedText, 'EX', 600);
   await client.incr('noteCount');
 
-  console.log(`Note ${id} a été créée.`);
-
   const dashboardData = {
     created_at: new Date(),
     action: "créée"
@@ -64,7 +62,6 @@ app.get('/note/:id', async (req, res) => {
     return res.status(404).render('404');
   }
   
-  console.log(`Note ${id} a été consultée.`);
   const dashboardData = {
     accessed_at: new Date(),
     action: "consultée"
@@ -86,8 +83,6 @@ app.post('/markAsRead/:id', async (req, res) => {
   await client.del(id);
   await client.decr('noteCount');
 
-  console.log(`Note ${id} a été marquée comme lue et supprimée.`);
-  
   const dashboardData = {
     deleted_at: new Date(),
     action: "supprimée"
