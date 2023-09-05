@@ -2,8 +2,18 @@ const express = require('express');
 const crypto = require('crypto-js');
 const Redis = require('ioredis');
 const dotenv = require('dotenv');
+const https = require('https');
+const fs = require('fs');
 const app = express();
 const port = 3000;
+
+// Lire les fichiers de certificat
+const privateKey = fs.readFileSync('certs/key.pem', 'utf8');
+const certificate = fs.readFileSync('certs/cert.pem', 'utf8');
+const credentials = { key: privateKey, cert: certificate };
+
+// Créer un serveur HTTPS
+const httpsServer = https.createServer(credentials, app);
 
 // Charger les variables d'environnement depuis le fichier .env
 dotenv.config({ path: './process.env' });
@@ -84,7 +94,8 @@ app.use((req, res, next) => {
   res.status(404).render('404');
 });
 
-// Démarrer le serveur
-app.listen(port, () => {
-  console.log(`Server running at https://note-m.cyclic.app:${port}/`);
+
+// Démarrer le serveur HTTPS
+httpsServer.listen(443, () => {
+  console.log('HTTPS Server running on port 443');
 });
