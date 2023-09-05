@@ -54,13 +54,7 @@ app.post('/upload', async (req, res) => {
 
   const shareLink = `https://note-m.cyclic.app/note/${id}`;
   res.render('share', { link: shareLink });
-
-  res.status(200).json({
-    id: id,
-    status: 'Note créée avec succès',
-  });
 });
-
 
 app.get('/note/:id', async (req, res) => {
   const { id } = req.params;
@@ -73,7 +67,6 @@ app.get('/note/:id', async (req, res) => {
   console.log(`Note ${id} a été consultée.`);
   const dashboardData = {
     accessed_at: new Date(),
-    note_id: id,
     action: "consultée"
   };
   await client.lpush('dashboardData', JSON.stringify(dashboardData));
@@ -97,7 +90,6 @@ app.post('/markAsRead/:id', async (req, res) => {
   
   const dashboardData = {
     deleted_at: new Date(),
-    note_id: id,
     action: "supprimée"
   };
   await client.lpush('dashboardData', JSON.stringify(dashboardData));
