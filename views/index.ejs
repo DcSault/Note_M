@@ -3,48 +3,14 @@
 <head>
   <title>Secure Note</title>
   <link rel="stylesheet" type="text/css" href="/style/index.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 </head>
 <body>
   <h1>Secure Note</h1>
   <div class="glass">
-    <form id="noteForm">
-      <textarea id="noteText" name="text" rows="4" cols="50" placeholder="Entrez votre texte ici..."></textarea><br>
-      <input type="button" id="uploadButton" value="Upload">
+    <form action="/upload" method="post">
+      <textarea name="text" rows="4" cols="50" placeholder="Entrez votre texte ici..."></textarea><br>
+      <input type="submit" value="Upload">
     </form>
   </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      document.getElementById('uploadButton').addEventListener('click', async function() {
-        // Générer un ID de note unique
-        const response = await fetch('/generateNoteID');
-        const data = await response.json();
-        const noteID = data.id;
-
-        // Chiffrer le texte de la note sur le côté client
-        const noteText = document.getElementById('noteText').value;
-        const encryptedText = CryptoJS.AES.encrypt(noteText, noteID).toString();
-
-        // Envoyer la note chiffrée et l'ID au serveur
-        const uploadResponse = await fetch('/upload', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            text: encryptedText,
-            id: noteID
-          })
-        });
-
-        // Gérer la réponse du serveur (ici, nous redirigeons simplement vers la page de partage)
-        const uploadData = await uploadResponse.json();
-        if (uploadData.link) {
-          window.location.href = uploadData.link;
-        }
-      });
-    });
-  </script>
 </body>
 </html>

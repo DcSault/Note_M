@@ -5,7 +5,6 @@
   <link rel="stylesheet" type="text/css" href="/style/download.css">
   <script src="/script/download.js"></script>
   <script src="/script/easteregg.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script> <!-- Ajout de CryptoJS -->
 </head>
 <body>
   <!-- Modal -->
@@ -22,7 +21,6 @@
   <div class="glass">
     <h1>Secure Note</h1>
     <div id="secureText" data-text="<%= text %>" data-id="<%= id %>">
-      <!-- Le texte chiffré sera inséré ici -->
     </div>
     <button onclick="copyToClipboard()">Presse-Papiers</button>
   </div>
@@ -31,22 +29,5 @@
       <img src="https://media.tenor.com/b3o_TJUfZFAAAAAd/cat.gif" alt="Cat">
     </div>
   </div>
-
-  <script>
-    function confirmRead() {
-      // Récupérer le texte chiffré et l'ID de la note
-      const encryptedText = document.getElementById("secureText").getAttribute("data-text");
-      const noteID = document.getElementById("secureText").getAttribute("data-id");
-
-      // Déchiffrer le texte avec l'ID de la note côté client
-      const decryptedTextClientSide = CryptoJS.AES.decrypt(encryptedText, noteID).toString(CryptoJS.enc.Utf8);
-    
-      // Le texte est maintenant déchiffré, vous pouvez choisir de le faire quoi que ce soit
-      // Par exemple, insérer le texte déchiffré dans le DOM
-      document.getElementById("secureText").textContent = decryptedTextClientSide;
-      // Fermer le modal
-      closeModal();
-    }
-  </script>
 </body>
 </html>
