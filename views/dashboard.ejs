@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tableau de bord</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 15px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Tableau de bord</h1>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>ID de la note</th>
+            <th>Action</th>
+        </tr>
+        <% dashboardData.forEach((data) => { %>
+            <tr>
+                <td><%= data.created_at || data.accessed_at || data.deleted_at %></td>
+                <td><%= data.note_id %></td>
+                <td><%= data.action %></td>
+            </tr>
+        <% }) %>
+    </table>
+
+</body>
+</html>
