@@ -3,14 +3,40 @@
 <head>
   <title>Secure Note</title>
   <link rel="stylesheet" type="text/css" href="/style/index.css">
+  <!-- Ajoutez cette ligne pour inclure crypto-js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
   <h1>Secure Note</h1>
   <div class="glass">
-    <form action="/upload" method="post">
-      <textarea name="text" rows="4" cols="50" placeholder="Entrez votre texte ici..."></textarea><br>
-      <input type="submit" value="Upload">
+    <form id="noteForm">
+      <textarea name="text" id="text" rows="4" cols="50" placeholder="Entrez votre texte ici..."></textarea><br>
+      <input type="button" value="Upload" onclick="uploadNote()">
     </form>
   </div>
+
+  <script>
+    async function uploadNote() {
+      const text = document.getElementById('text').value;
+
+      // Générer les IDs depuis le serveur
+      let response = await fetch('/generateId');
+      let { noteID, encryptionID } = await response.json();
+
+      // Chiffrer le texte ici avec encryptionID (côté client)
+      const encryptedText = clientSideEncrypt(text, encryptionID);
+
+      // Envoi du texte chiffré et noteID au serveur
+      $.post("/upload", { text: encryptedText, noteID: noteID }, function(data) {
+        // Faites ce que vous voulez avec la réponse du serveur
+        // Par exemple, affichez le lien de partage
+      });
+    }
+
+    function clientSideEncrypt(text, encryptionID) {
+      return CryptoJS.AES.encrypt(text, encryptionID).toString();
+    }
+  </script>
 </body>
 </html>
