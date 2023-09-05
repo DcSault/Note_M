@@ -94,8 +94,12 @@ app.use((req, res, next) => {
   res.status(404).render('404');
 });
 
+// Démarrer le serveur
+app.listen(port, () => {
+  console.log(`Server running at https://note-m.cyclic.app:${port}/`);
+});
 
 // Démarrer le serveur HTTPS
-httpsServer.listen(3000, () => {
-  console.log('HTTPS Server running on port 443');
-});
+// httpsServer.listen(3000, () => {
+//   console.log('HTTPS Server running on port 3000');
+// });
