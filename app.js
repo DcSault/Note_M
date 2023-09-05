@@ -1,5 +1,4 @@
 const express = require('express');
-const crypto = require('crypto');
 const crypto = require('crypto-js');
 const Redis = require('ioredis');
 const dotenv = require('dotenv');
@@ -37,18 +36,12 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-// Nouvelle route pour générer des IDs
-app.get('/generateId', (req, res) => {
-  const noteID = crypto.randomBytes(16).toString('hex'); // Génère un ID aléatoire pour la note
-  const encryptionID = crypto.randomBytes(16).toString('hex'); // Génère un ID aléatoire pour le chiffrement
-  res.json({ noteID, encryptionID });
-});
-
-// Modification de la route POST '/upload'
 app.post('/upload', async (req, res) => {
-  const { text, noteID } = req.body;
+  const { text } = req.body;
   const encryptedText = crypto.AES.encrypt(text, MASTER_KEY).toString();
-  await client.set(noteID, encryptedText, 'EX', 600);
+  const id = new Date().getTime().toString();
+  
+  await client.set(id, encryptedText, 'EX', 600);
   await client.incr('noteCount');
 
   const dashboardData = {
@@ -57,10 +50,9 @@ app.post('/upload', async (req, res) => {
   };
   await client.lpush('dashboardData', JSON.stringify(dashboardData));
 
-  const shareLink = `https://note-m.cyclic.app/note/${noteID}`;
+  const shareLink = `https://note-m.cyclic.app/note/${id}`;
   res.render('share', { link: shareLink });
 });
-
 
 app.get('/note/:id', async (req, res) => {
   const { id } = req.params;
