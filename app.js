@@ -36,10 +36,14 @@ app.get('/', (req, res) => {
   res.render('index');
 });
 
-app.post('/upload', async (req, res) => {
-  const { text } = req.body;
-  const encryptedText = crypto.AES.encrypt(text, MASTER_KEY).toString();
+app.get('/generateNoteID', (req, res) => {
   const id = new Date().getTime().toString();
+  res.status(200).json({ id });
+});
+
+app.post('/upload', async (req, res) => {
+  const { text, id } = req.body;
+  const encryptedText = crypto.AES.encrypt(text, MASTER_KEY).toString();
   
   await client.set(id, encryptedText, 'EX', 600);
   await client.incr('noteCount');
