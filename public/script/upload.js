@@ -1,5 +1,5 @@
 // Inclure CryptoJS si vous utilisez un système de modules
-import CryptoJS from 'crypto-js';
+// import CryptoJS from 'crypto-js';
 
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector("form");
