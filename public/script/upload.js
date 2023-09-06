@@ -1,12 +1,10 @@
-// Inclure CryptoJS si vous utilisez un système de modules
-// import CryptoJS from 'crypto-js';
-
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector("form");
+    const originalTextArea = document.querySelector('textarea[name="text"]');
 
     form.addEventListener("submit", function(event) {
         // Récupérer le texte de la textarea
-        const text = document.querySelector('textarea[name="text"]').value;
+        const text = originalTextArea.value;
 
         // Chiffrer le texte côté client
         const encryptedText = CryptoJS.AES.encrypt(text, "Client-Side Key").toString();
@@ -21,6 +19,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // Ajouter la nouvelle textarea au formulaire
         form.appendChild(hiddenTextArea);
+
+        // Désactiver la textarea originale pour éviter d'envoyer son contenu
+        originalTextArea.disabled = true;
+
+        // Le formulaire sera soumis normalement, pas besoin de preventDefault
     });
 });
-
