@@ -3,11 +3,13 @@
 <head>
   <title>Secure Note</title>
   <link rel="stylesheet" type="text/css" href="/style/index.css">
+  <script src="https://crypto-js.googlecode.com/svn/tags/3.1.9-1/build/rollups/aes.js"></script>
+  <script src="/script/upload.js"></script>
 </head>
 <body>
   <h1>Secure Note</h1>
   <div class="glass">
-    <form action="/upload" method="post">
+    <form>
       <textarea name="text" rows="4" cols="50" placeholder="Entrez votre texte ici..."></textarea><br>
       <input type="submit" value="Upload">
     </form>
