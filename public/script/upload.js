@@ -1,6 +1,8 @@
 // Inclure CryptoJS si vous utilisez un système de modules
 // import CryptoJS from 'crypto-js';
 
+console.log("Le script upload.js a été chargé");
+
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.querySelector("form");
     const textArea = document.querySelector('textarea[name="text"]');
