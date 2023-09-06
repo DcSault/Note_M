@@ -1,36 +1,59 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Tableau de bord</title>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 15px;
-            text-align: left;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <h1>Notes Dashboard</h1>
 
-    <h1>Tableau de bord</h1>
+    <h2>Events</h2>
+    <ul id="events-list">
+        <% events.forEach(function(event) { %>
+            <li><%= event.type %> - <%= event.timestamp %></li>
+        <% }); %>
+    </ul>
 
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>ID de la note</th>
-            <th>Action</th>
-        </tr>
-        <% dashboardData.forEach((data) => { %>
-            <tr>
-                <td><%= data.created_at || data.accessed_at || data.deleted_at %></td>
-                <td><%= data.note_id %></td>
-                <td><%= data.action %></td>
-            </tr>
-        <% }) %>
-    </table>
+    <!-- Chart Container -->
+    <div>
+        <canvas id="eventChart" width="400" height="200"></canvas>
+    </div>
 
+    <script>
+        // Assuming 'events' is passed from the server as a JSON object
+        const events = <%- JSON.stringify(events) %>;
+
+        // Prepare data for the chart
+        const eventTypes = ['created', 'read', 'deleted'];
+        const eventData = eventTypes.map(type => {
+            return events.filter(event => event.type === type).length;
+        });
+
+        // Create the chart
+        const ctx = document.getElementById('eventChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: eventTypes,
+                datasets: [{
+                    label: '# of Events',
+                    data: eventData,
+                    backgroundColor: [
+                        'rgba(75, 192, 192, 0.5)',  // created: blue
+                        'rgba(255, 206, 86, 0.5)',  // read: yellow
+                        'rgba(255, 99, 132, 0.5)'   // deleted: red
+                    ],
+                    borderColor: [
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        });
+    </script>
 </body>
 </html>
