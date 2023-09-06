@@ -58,7 +58,8 @@ app.post('/upload', async (req, res) => {
   await client.set(id, serverEncryptedText, 'EX', 600); // Expire après 600 secondes
   
   const shareLink = `https://note-m.cyclic.app/note/${id}`;
-  res.json({ redirectUrl: shareLink }); // Renvoie une réponse JSON avec l'URL de redirection
+  res.json({ redirectUrl: shareLink });
+  res.render('share', { link: shareLink }); // Renvoie une réponse JSON avec l'URL de redirection
 });
 
 // Route pour télécharger une note
