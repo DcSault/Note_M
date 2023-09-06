@@ -23,8 +23,13 @@ document.addEventListener("DOMContentLoaded", function() {
         })
         .then(response => response.json())
         .then(data => {
-            // Faire quelque chose avec la réponse, comme rediriger vers la page de partage
-            window.location.href = data.redirectUrl; // Supposons que le serveur renvoie l'URL de redirection
+            // Stocker le lien dans le localStorage
+            localStorage.setItem('shareLink', data.redirectUrl);
+            // Rediriger vers la page de partage
+            window.location.href = '/share';
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
         });
     });
 });
