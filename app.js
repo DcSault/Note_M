@@ -49,22 +49,16 @@ app.get('/', (req, res) => {
 
 // Route pour l'upload de texte
 app.post('/upload', async (req, res) => {
-  // Récupération du texte chiffré côté client
   const clientEncryptedText = req.body.text;
-
-  // Déchiffrement du texte chiffré côté client
   const decryptedTextFromClient = crypto.AES.decrypt(clientEncryptedText, "Client-Side Key").toString(crypto.enc.Utf8);
-
-  // Chiffrement côté serveur
   const serverEncryptedText = crypto.AES.encrypt(decryptedTextFromClient, MASTER_KEY).toString();
   
   const id = new Date().getTime().toString();
   
-  // Sauvegarder le texte chiffré dans Redis
   await client.set(id, serverEncryptedText, 'EX', 600); // Expire après 600 secondes
   
   const shareLink = `https://note-m.cyclic.app/note/${id}`;
-  res.render('share', { link: shareLink });
+  res.json({ redirectUrl: shareLink }); // Renvoie une réponse JSON avec l'URL de redirection
 });
 
 // Route pour télécharger une note
