@@ -8,12 +8,12 @@ const app = express();
 const port = 3000;
 
 // Lire les fichiers de certificat
-const privateKey = fs.readFileSync('certs/key.pem', 'utf8');
-const certificate = fs.readFileSync('certs/cert.pem', 'utf8');
-const credentials = { key: privateKey, cert: certificate };
+//const privateKey = fs.readFileSync('certs/key.pem', 'utf8');
+//const certificate = fs.readFileSync('certs/cert.pem', 'utf8');
+//const credentials = { key: privateKey, cert: certificate };
 
 // Créer un serveur HTTPS
-const httpsServer = https.createServer(credentials, app);
+//const httpsServer = https.createServer(credentials, app);
 
 // Charger les variables d'environnement depuis le fichier .env
 dotenv.config({ path: './process.env' });
