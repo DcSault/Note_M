@@ -5,6 +5,10 @@
     <title>Dashboard</title>
     <link rel="stylesheet" type="text/css" href="/style/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Ajout des données d'événements pour qu'elles soient utilisables dans le fichier JavaScript externe
+        const eventsData = <%- JSON.stringify(events) %>;
+    </script>
 </head>
 <body>
 
