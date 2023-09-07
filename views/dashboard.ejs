@@ -2,133 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard Complet</title>
+    <title>Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/style/dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        /* Styles de base */
-        body {
-            font-family: Arial, sans-serif;
-            background: url('background-image.jpg'); /* Supposons que vous avez une image d'arrière-plan */
-            background-size: cover;
-        }
-
-        /* Effet Glassmorphism */
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Container de graphiques */
-        div.chart-container {
-            margin: 20px;
-            padding: 20px;
-        }
-
-        /* Titres */
-        h1, h2, h3 {
-            color: #fff;
-        }
-    </style>
 </head>
 <body>
-    <div class="glass">
-        <h1>Tableau de bord complet des Notes</h1>
 
-        <!-- Liste des Événements -->
-        <h2>Événements Récents</h2>
-        <ul id="events-list">
-            <% events.slice(0, 10).forEach(function(event) { %>
-                <li><%= event.type %> - <%= event.timestamp %></li>
-            <% }); %>
-        </ul>
+    <div class="container">
 
-        <!-- Graphique à Barres : Répartition des Types d'Événements -->
-        <div class="chart-container glass">
-            <h3>Répartition des Types d'Événements</h3>
+        <h1 class="title">Notes Dashboard</h1>
+
+        <!-- Filters -->
+        <div class="glass">
+            <h2>Filters</h2>
+            <form id="filter-form">
+                <label for="date-range">Date range:</label>
+                <input type="date" id="start-date">
+                <input type="date" id="end-date">
+                <input type="submit" value="Apply" class="button">
+            </form>
+        </div>
+
+        <!-- Events -->
+        <h2>Events</h2>
+        <div class="glass">
+            <ul id="events-list">
+                <% events.forEach(function(event) { %>
+                    <li><%= event.type %> - <%= event.timestamp %></li>
+                <% }); %>
+            </ul>
+        </div>
+
+        <!-- Chart Container -->
+        <div class="glass chart-container">
             <canvas id="eventChart" width="400" height="200"></canvas>
         </div>
 
-        <!-- Graphique en Ligne : Événements au Fil du Temps -->
-        <div class="chart-container glass">
-            <h3>Événements au Fil du Temps</h3>
-            <canvas id="timeChart" width="400" height="200"></canvas>
-        </div>
-
-        <!-- Graphique à Secteurs : Événements par Utilisateur (exemple) -->
-        <div class="chart-container glass">
-            <h3>Événements par Utilisateur</h3>
-            <canvas id="userChart" width="400" height="200"></canvas>
-        </div>
     </div>
-    <script>
-        // Supposons que 'events' est passé du serveur comme un objet JSON
-        const events = <%- JSON.stringify(events) %>;
 
-        // Préparation des données pour le graphique à barres
-        const eventTypes = ['created', 'read', 'deleted'];
-        const eventData = eventTypes.map(type => {
-            return events.filter(event => event.type === type).length;
-        });
-
-        // Création du graphique à barres
-        const barCtx = document.getElementById('eventChart').getContext('2d');
-        const barChart = new Chart(barCtx, {
-            type: 'bar',
-            data: {
-                labels: eventTypes,
-                datasets: [{
-                    label: '# d\'Événements',
-                    data: eventData,
-                    backgroundColor: ['blue', 'yellow', 'red'],
-                    borderColor: ['blue', 'yellow', 'red'],
-                    borderWidth: 1
-                }]
-            }
-        });
-
-        // Préparation des données pour le graphique en ligne
-        const timeLabels = [...new Set(events.map(event => event.timestamp))];
-        const timeData = timeLabels.map(time => {
-            return events.filter(event => event.timestamp === time).length;
-        });
-
-        // Création du graphique en ligne
-        const lineCtx = document.getElementById('timeChart').getContext('2d');
-        const lineChart = new Chart(lineCtx, {
-            type: 'line',
-            data: {
-                labels: timeLabels,
-                datasets: [{
-                    label: '# d\'Événements au Fil du Temps',
-                    data: timeData,
-                    borderColor: 'green',
-                    fill: false
-                }]
-            }
-        });
-
-        // Préparation des données pour le graphique à secteurs (exemple)
-        const userLabels = [...new Set(events.map(event => event.user))];
-        const userData = userLabels.map(user => {
-            return events.filter(event => event.user === user).length;
-        });
-
-        // Création du graphique à secteurs
-        const pieCtx = document.getElementById('userChart').getContext('2d');
-        const pieChart = new Chart(pieCtx, {
-            type: 'pie',
-            data: {
-                labels: userLabels,
-                datasets: [{
-                    label: '# d\'Événements par Utilisateur',
-                    data: userData,
-                    backgroundColor: ['purple', 'orange', 'pink'],
-                }]
-            }
-        });
-    </script>
+    <script src="/script/dashboard.js"></script>
 </body>
 </html>
