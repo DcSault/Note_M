@@ -18,11 +18,12 @@ body {
 .title {
   text-align: center;
   color: #1F1F1F;
+  font-size: 2em;
 }
 
 /* Style Glassmorphism */
 .glass {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.3); /* Augmentation de l'opacité */
   border-radius: 10px;
   padding: 20px;
   margin: 1rem;
@@ -34,12 +35,12 @@ body {
   transform: scale(1.05);
 }
 
+/* Style du graphique */
 .chart-container {
-  height: 300px;
+  height: 400px; /* Ajustement de la hauteur */
   width: 100%;
 }
 
-/* Style du graphique */
 #eventChart {
   width: 100% !important;
   height: 100% !important;
@@ -50,12 +51,13 @@ body {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  font-size: 1.2em; /* Augmentation de la taille de la police */
 }
 
 #events-list li {
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  background-color: rgba(0, 0, 0, 0.05);
+  margin: 1rem 0; /* Plus d'espacement */
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.1); /* Augmentation de l'opacité */
   border-radius: 5px;
+  color: #000; /* Couleur du texte pour améliorer le contraste */
 }
-
