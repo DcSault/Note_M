@@ -2,83 +2,130 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Dashboard Complet</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Styles de base */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('background-image.jpg'); /* Supposons que vous avez une image d'arrière-plan */
+            background-size: cover;
+        }
+
+        /* Effet Glassmorphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Container de graphiques */
+        div.chart-container {
+            margin: 20px;
+            padding: 20px;
+        }
+
+        /* Titres */
+        h1, h2, h3 {
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-    <h1>Notes Dashboard</h1>
+    <div class="glass">
+        <h1>Tableau de bord complet des Notes</h1>
 
-    <h2>Events</h2>
-    <ul id="events-list">
-        <% events.forEach(function(event) { %>
-            <li><%= event.type %> - <%= event.timestamp %></li>
-        <% }); %>
-    </ul>
+        <!-- Liste des Événements -->
+        <h2>Événements Récents</h2>
+        <ul id="events-list">
+            <% events.slice(0, 10).forEach(function(event) { %>
+                <li><%= event.type %> - <%= event.timestamp %></li>
+            <% }); %>
+        </ul>
 
-    <!-- Bar Chart Container -->
-    <div>
-        <h3>Event Types Distribution</h3>
-        <canvas id="eventChart" width="400" height="200"></canvas>
+        <!-- Graphique à Barres : Répartition des Types d'Événements -->
+        <div class="chart-container glass">
+            <h3>Répartition des Types d'Événements</h3>
+            <canvas id="eventChart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- Graphique en Ligne : Événements au Fil du Temps -->
+        <div class="chart-container glass">
+            <h3>Événements au Fil du Temps</h3>
+            <canvas id="timeChart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- Graphique à Secteurs : Événements par Utilisateur (exemple) -->
+        <div class="chart-container glass">
+            <h3>Événements par Utilisateur</h3>
+            <canvas id="userChart" width="400" height="200"></canvas>
+        </div>
     </div>
-
-    <!-- Line Chart Container -->
-    <div>
-        <h3>Events Over Time</h3>
-        <canvas id="timeChart" width="400" height="200"></canvas>
-    </div>
-
     <script>
-        // Assuming 'events' is passed from the server as a JSON object
+        // Supposons que 'events' est passé du serveur comme un objet JSON
         const events = <%- JSON.stringify(events) %>;
 
-        // Prepare data for the bar chart
+        // Préparation des données pour le graphique à barres
         const eventTypes = ['created', 'read', 'deleted'];
         const eventData = eventTypes.map(type => {
             return events.filter(event => event.type === type).length;
         });
 
-        // Create the bar chart
+        // Création du graphique à barres
         const barCtx = document.getElementById('eventChart').getContext('2d');
         const barChart = new Chart(barCtx, {
             type: 'bar',
             data: {
                 labels: eventTypes,
                 datasets: [{
-                    label: '# of Events',
+                    label: '# d\'Événements',
                     data: eventData,
-                    backgroundColor: [
-                        'rgba(75, 192, 192, 0.5)',  
-                        'rgba(255, 206, 86, 0.5)',  
-                        'rgba(255, 99, 132, 0.5)'   
-                    ],
-                    borderColor: [
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(255, 99, 132, 1)'
-                    ],
+                    backgroundColor: ['blue', 'yellow', 'red'],
+                    borderColor: ['blue', 'yellow', 'red'],
                     borderWidth: 1
                 }]
             }
         });
 
-        // Prepare data for the line chart
-        // Note: You'll need to update this part based on how you store timestamps in 'events'
+        // Préparation des données pour le graphique en ligne
         const timeLabels = [...new Set(events.map(event => event.timestamp))];
         const timeData = timeLabels.map(time => {
             return events.filter(event => event.timestamp === time).length;
         });
 
-        // Create the line chart
+        // Création du graphique en ligne
         const lineCtx = document.getElementById('timeChart').getContext('2d');
         const lineChart = new Chart(lineCtx, {
             type: 'line',
             data: {
                 labels: timeLabels,
                 datasets: [{
-                    label: '# of Events Over Time',
+                    label: '# d\'Événements au Fil du Temps',
                     data: timeData,
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderColor: 'green',
                     fill: false
+                }]
+            }
+        });
+
+        // Préparation des données pour le graphique à secteurs (exemple)
+        const userLabels = [...new Set(events.map(event => event.user))];
+        const userData = userLabels.map(user => {
+            return events.filter(event => event.user === user).length;
+        });
+
+        // Création du graphique à secteurs
+        const pieCtx = document.getElementById('userChart').getContext('2d');
+        const pieChart = new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: userLabels,
+                datasets: [{
+                    label: '# d\'Événements par Utilisateur',
+                    data: userData,
+                    backgroundColor: ['purple', 'orange', 'pink'],
                 }]
             }
         });
