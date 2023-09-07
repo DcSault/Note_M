@@ -1,11 +1,15 @@
 /* Style de base */
 body {
-  background: linear-gradient(to bottom right, #f1f1f1, #e1e1e1);
+  background: linear-gradient(to bottom right, #f1f1f1, #e1e1f1);
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
   max-width: 1200px;
   margin: auto;
   padding: 20px;
@@ -13,6 +17,7 @@ body {
 
 .title {
   text-align: center;
+  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -23,7 +28,9 @@ body {
   padding: 20px;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  flex: 1;
+  min-width: calc(50% - 20px);
+  margin: 10px;
   transition: transform 0.3s ease;
 }
 
@@ -56,7 +63,7 @@ body {
     padding: 10px;
   }
   
-  .chart-container {
-    width: 100%;
+  .glass, .chart-container {
+    min-width: 100%;
   }
 }
