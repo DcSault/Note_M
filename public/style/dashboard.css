@@ -1,41 +1,37 @@
 /* Style de base */
 body {
-  background: linear-gradient(to bottom right, #f1f1f1, #e1e1f1);
-  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
+  color: #333;
 }
 
 .container {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   max-width: 1200px;
   margin: auto;
   padding: 20px;
 }
 
 .title {
-  text-align: center;
   width: 100%;
+  font-size: 1.5em;
+  text-align: center;
   margin-bottom: 20px;
 }
 
 /* Style Glassmorphism */
 .glass, .chart-container {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.8);
   border-radius: 10px;
   padding: 20px;
-  backdrop-filter: blur(10px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  min-width: calc(50% - 20px);
+  flex-basis: calc(50% - 20px);
   margin: 10px;
-  transition: transform 0.3s ease;
-}
-
-.glass:hover, .chart-container:hover {
-  transform: scale(1.05);
 }
 
 /* Liste d'événements */
@@ -46,10 +42,9 @@ body {
 }
 
 #events-list li {
-  background: rgba(255, 255, 255, 0.1);
-  margin: 8px 0;
+  font-size: 1.1em;
   padding: 10px;
-  border-radius: 5px;
+  border-bottom: 1px solid #ddd;
 }
 
 /* Graphiques */
@@ -57,13 +52,19 @@ body {
   position: relative;
 }
 
-/* Responsive */
+/* Pour la lisibilité */
+h1, h2, li {
+  line-height: 1.5;
+}
+
+/* Responsivité */
 @media only screen and (max-width: 600px) {
   .container {
+    flex-direction: column;
     padding: 10px;
   }
   
   .glass, .chart-container {
-    min-width: 100%;
+    flex-basis: 100%;
   }
 }
