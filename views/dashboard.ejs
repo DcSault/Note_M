@@ -12,20 +12,9 @@
 
         <h1 class="title">Notes Dashboard</h1>
 
-        <!-- Filters -->
-        <div class="glass">
-            <h2>Filters</h2>
-            <form id="filter-form">
-                <label for="date-range">Date range:</label>
-                <input type="date" id="start-date">
-                <input type="date" id="end-date">
-                <input type="submit" value="Apply" class="button">
-            </form>
-        </div>
-
         <!-- Events -->
-        <h2>Events</h2>
         <div class="glass">
+            <h2>Events</h2>
             <ul id="events-list">
                 <% events.forEach(function(event) { %>
                     <li><%= event.type %> - <%= event.timestamp %></li>
