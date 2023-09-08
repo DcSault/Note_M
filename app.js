@@ -109,17 +109,6 @@ app.post('/markAsRead/:id', async (req, res, next) => {
   }
 });
 
-// New route for the dashboard
-app.get('/dashboard', async (req, res, next) => {
-  try {
-    const rawEvents = await client.lrange('noteEvents', 0, 99);
-    const events = rawEvents.map(event => JSON.parse(event));
-    res.render('dashboard', { events });
-  } catch (err) {
-    next(err);
-  }
-});
-
 // Middleware to handle 404 errors
 app.use((req, res, next) => {
   res.status(404).render('404');
